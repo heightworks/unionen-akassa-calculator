@@ -64,6 +64,7 @@ class AkassaApp {
         this.decisionActions = document.getElementById('decision-actions');
         this.applyNowBtn = document.getElementById('apply-now-btn');
         this.prepareBtn = document.getElementById('prepare-btn');
+        this.enterDataBtn = document.getElementById('enter-data-btn');
     }
 
     bindEvents() {
@@ -344,6 +345,10 @@ class AkassaApp {
         // Calculate income eligibility
         const allIncomes = Array.from(this.incomeInputs).map(input => parseFloat(input.value) || 0);
         const qualifyingMonths = allIncomes.filter(income => income >= this.MIN_QUALIFYING_INCOME).length;
+        const hasAnyIncome = allIncomes.some(income => income > 0);
+        
+        // Check if income data has been entered
+        const hasIncomeData = allIncomes.some(income => income > 0);
         
         // Determine eligibility status
         let decision = {
@@ -354,7 +359,28 @@ class AkassaApp {
             actions: []
         };
 
-        if (metRequirements >= 10 && qualifyingMonths >= 4) {
+        // If no income data entered, show data entry prompt
+        if (!hasIncomeData) {
+            decision = {
+                status: 'incomplete',
+                icon: '📝',
+                text: 'ENTER YOUR INCOME DATA',
+                details: `You have ${metRequirements}/${totalRequirements} requirements checked, but no income data entered. Please fill in your monthly income data below to get an accurate assessment.`,
+                actions: ['enter-data']
+            };
+        }
+        // If income data exists but not enough qualifying months
+        else if (hasIncomeData && qualifyingMonths < 4) {
+            decision = {
+                status: 'not-eligible',
+                icon: '❌',
+                text: 'NOT ELIGIBLE - Insufficient Income',
+                details: `You have ${qualifyingMonths} qualifying months (need 4+). You earned at least 11,000 SEK in ${qualifyingMonths} months. You need to earn at least 11,000 SEK in 4+ months to qualify.`,
+                actions: ['review-income']
+            };
+        }
+        // If all requirements met and sufficient income
+        else if (metRequirements >= 10 && qualifyingMonths >= 4) {
             decision = {
                 status: 'eligible',
                 icon: '✅',
@@ -400,6 +426,7 @@ class AkassaApp {
         // Update action buttons
         this.applyNowBtn.style.display = decision.actions.includes('apply') ? 'block' : 'none';
         this.prepareBtn.style.display = decision.actions.includes('prepare') ? 'block' : 'none';
+        this.enterDataBtn.style.display = decision.actions.includes('enter-data') ? 'block' : 'none';
         this.decisionActions.style.display = decision.actions.length > 0 ? 'flex' : 'none';
     }
 
