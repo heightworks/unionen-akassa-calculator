@@ -234,7 +234,7 @@ class AkassaApp {
         this.updateOverallSummary();
         
         // Update eligibility assessment when income data changes
-        this.updateEligibilityAssessment();
+        this.updateEligibilityAssessmentWithIncome();
     }
 
     updateYearSummary(year) {
@@ -286,10 +286,23 @@ class AkassaApp {
         }
         
         this.updateDataSummaries();
-        this.updateEligibilityAssessment();
+        this.updateEligibilityAssessmentWithIncome();
     }
 
     updateEligibilityAssessment() {
+        // Update individual requirement statuses
+        this.assessmentCheckboxes.forEach(checkbox => {
+            const statusSpan = document.getElementById(checkbox.id.replace('-', '-') + '-status');
+            if (statusSpan) {
+                statusSpan.textContent = checkbox.checked ? '✅' : '❌';
+            }
+        });
+
+        // Calculate overall eligibility
+        this.calculateEligibilityDecision();
+    }
+
+    updateEligibilityAssessmentWithIncome() {
         // Update individual requirement statuses
         this.assessmentCheckboxes.forEach(checkbox => {
             const statusSpan = document.getElementById(checkbox.id.replace('-', '-') + '-status');
