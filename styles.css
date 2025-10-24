@@ -316,6 +316,170 @@ small {
     border-bottom: 2px solid #f0f0f0;
 }
 
+/* Eligibility Assessment Styles */
+.eligibility-assessment {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-left: 4px solid #667eea;
+}
+
+.eligibility-assessment h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.assessment-description {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.assessment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.requirement-group {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.requirement-group h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 8px;
+}
+
+.requirement-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.requirement-item:last-child {
+    border-bottom: none;
+}
+
+.requirement-checkbox {
+    margin-right: 12px;
+    transform: scale(1.1);
+}
+
+.requirement-item label {
+    flex: 1;
+    font-weight: 500;
+    color: #34495e;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.requirement-status {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Eligibility Decision Styles */
+.eligibility-decision {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.eligibility-decision h4 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.decision-card {
+    text-align: center;
+}
+
+.decision-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+.decision-icon {
+    font-size: 2rem;
+}
+
+.decision-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.decision-details {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+.decision-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Decision Status Colors */
+.decision-status.eligible {
+    background: #d5f4e6;
+    border: 2px solid #27ae60;
+}
+
+.decision-status.eligible .decision-icon {
+    color: #27ae60;
+}
+
+.decision-status.eligible .decision-text {
+    color: #27ae60;
+}
+
+.decision-status.not-eligible {
+    background: #fdf2f2;
+    border: 2px solid #e74c3c;
+}
+
+.decision-status.not-eligible .decision-icon {
+    color: #e74c3c;
+}
+
+.decision-status.not-eligible .decision-text {
+    color: #e74c3c;
+}
+
+.decision-status.partial {
+    background: #fff3cd;
+    border: 2px solid #f39c12;
+}
+
+.decision-status.partial .decision-icon {
+    color: #f39c12;
+}
+
+.decision-status.partial .decision-text {
+    color: #f39c12;
+}
+
 .personal-info {
     display: flex;
     gap: 30px;

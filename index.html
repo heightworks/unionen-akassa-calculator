@@ -166,6 +166,101 @@
                     <button id="clear-data" class="action-btn danger">Clear All Data</button>
                 </div>
 
+                <div class="eligibility-assessment">
+                    <h3>Unionen Akassa Eligibility Assessment</h3>
+                    <p class="assessment-description">Complete this checklist to determine your eligibility for unemployment insurance</p>
+                    
+                    <div class="assessment-grid">
+                        <div class="requirement-group">
+                            <h4>Membership Requirements</h4>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-member" class="requirement-checkbox">
+                                <label for="assess-member">I am a Unionen Akassa member</label>
+                                <span class="requirement-status" id="assess-member-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-fees" class="requirement-checkbox">
+                                <label for="assess-fees">My membership fees are paid and current</label>
+                                <span class="requirement-status" id="assess-fees-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-duration" class="requirement-checkbox">
+                                <label for="assess-duration">I have been a member for at least 12 months</label>
+                                <span class="requirement-status" id="assess-duration-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h4>Work History Requirements</h4>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-work-history" class="requirement-checkbox">
+                                <label for="assess-work-history">I have worked and earned income in Sweden</label>
+                                <span class="requirement-status" id="assess-work-history-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-income-months" class="requirement-checkbox">
+                                <label for="assess-income-months">I have earned at least 11,000 SEK in at least 6 months of the last 12 months</label>
+                                <span class="requirement-status" id="assess-income-months-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-recent-work" class="requirement-checkbox">
+                                <label for="assess-recent-work">I have worked within the last 6 months</label>
+                                <span class="requirement-status" id="assess-recent-work-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h4>Unemployment Status</h4>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-unemployed" class="requirement-checkbox">
+                                <label for="assess-unemployed">I am currently unemployed or working less than full-time</label>
+                                <span class="requirement-status" id="assess-unemployed-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-af-registered" class="requirement-checkbox">
+                                <label for="assess-af-registered">I am registered with Arbetsförmedlingen</label>
+                                <span class="requirement-status" id="assess-af-registered-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-available" class="requirement-checkbox">
+                                <label for="assess-available">I am available for work (not sick, traveling, etc.)</label>
+                                <span class="requirement-status" id="assess-available-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h4>Application Requirements</h4>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-application" class="requirement-checkbox">
+                                <label for="assess-application">I have submitted my main Akassa application</label>
+                                <span class="requirement-status" id="assess-application-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="assess-reports" class="requirement-checkbox">
+                                <label for="assess-reports">I will submit monthly applications and AF reports</label>
+                                <span class="requirement-status" id="assess-reports-status">❌</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="eligibility-decision">
+                        <h4>Eligibility Decision</h4>
+                        <div class="decision-card">
+                            <div class="decision-status" id="decision-status">
+                                <span class="decision-icon">❓</span>
+                                <span class="decision-text">Complete the checklist above</span>
+                            </div>
+                            <div class="decision-details" id="decision-details">
+                                <p>Fill in your income data and check the requirements to get your eligibility assessment.</p>
+                            </div>
+                            <div class="decision-actions" id="decision-actions" style="display: none;">
+                                <button id="apply-now-btn" class="action-btn primary" style="display: none;">Apply Now</button>
+                                <button id="prepare-btn" class="action-btn" style="display: none;">Prepare Application</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="years-container">
                     <div class="year-section" data-year="2025">
                         <h3>2025</h3>

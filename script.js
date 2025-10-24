@@ -56,6 +56,14 @@ class AkassaApp {
         this.incomeInputs = document.querySelectorAll('.income-input');
         this.notesInputs = document.querySelectorAll('.notes-input');
         this.qualifyingStatuses = document.querySelectorAll('.qualifying-status');
+        
+        // Eligibility assessment elements
+        this.assessmentCheckboxes = document.querySelectorAll('.requirement-checkbox');
+        this.decisionStatus = document.getElementById('decision-status');
+        this.decisionDetails = document.getElementById('decision-details');
+        this.decisionActions = document.getElementById('decision-actions');
+        this.applyNowBtn = document.getElementById('apply-now-btn');
+        this.prepareBtn = document.getElementById('prepare-btn');
     }
 
     bindEvents() {
@@ -96,6 +104,11 @@ class AkassaApp {
         this.loadDataBtn.addEventListener('click', () => this.loadPersonalData(true));
         this.exportDataBtn.addEventListener('click', () => this.exportPersonalData());
         this.clearDataBtn.addEventListener('click', () => this.clearPersonalData());
+        
+        // Eligibility assessment events
+        this.assessmentCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => this.updateEligibilityAssessment());
+        });
     }
 
     switchPage(pageName) {
@@ -219,6 +232,9 @@ class AkassaApp {
         
         // Update overall summary
         this.updateOverallSummary();
+        
+        // Update eligibility assessment when income data changes
+        this.updateEligibilityAssessment();
     }
 
     updateYearSummary(year) {
@@ -270,6 +286,108 @@ class AkassaApp {
         }
         
         this.updateDataSummaries();
+        this.updateEligibilityAssessment();
+    }
+
+    updateEligibilityAssessment() {
+        // Update individual requirement statuses
+        this.assessmentCheckboxes.forEach(checkbox => {
+            const statusSpan = document.getElementById(checkbox.id.replace('-', '-') + '-status');
+            if (statusSpan) {
+                statusSpan.textContent = checkbox.checked ? '✅' : '❌';
+            }
+        });
+
+        // Auto-check income requirements based on data
+        this.updateIncomeRequirements();
+
+        // Calculate overall eligibility
+        this.calculateEligibilityDecision();
+    }
+
+    updateIncomeRequirements() {
+        // Check if user has qualifying income months
+        const allIncomes = Array.from(this.incomeInputs).map(input => parseFloat(input.value) || 0);
+        const qualifyingMonths = allIncomes.filter(income => income >= this.MIN_QUALIFYING_INCOME).length;
+        
+        // Auto-check income-related requirements
+        const incomeMonthsCheckbox = document.getElementById('assess-income-months');
+        const workHistoryCheckbox = document.getElementById('assess-work-history');
+        
+        if (incomeMonthsCheckbox) {
+            incomeMonthsCheckbox.checked = qualifyingMonths >= 6;
+        }
+        
+        if (workHistoryCheckbox) {
+            workHistoryCheckbox.checked = allIncomes.some(income => income > 0);
+        }
+    }
+
+    calculateEligibilityDecision() {
+        const checkedBoxes = Array.from(this.assessmentCheckboxes).filter(cb => cb.checked);
+        const totalRequirements = this.assessmentCheckboxes.length;
+        const metRequirements = checkedBoxes.length;
+        
+        // Calculate income eligibility
+        const allIncomes = Array.from(this.incomeInputs).map(input => parseFloat(input.value) || 0);
+        const qualifyingMonths = allIncomes.filter(income => income >= this.MIN_QUALIFYING_INCOME).length;
+        
+        // Determine eligibility status
+        let decision = {
+            status: 'incomplete',
+            icon: '❓',
+            text: 'Complete the checklist above',
+            details: 'Fill in your income data and check the requirements to get your eligibility assessment.',
+            actions: []
+        };
+
+        if (metRequirements >= 10 && qualifyingMonths >= 6) {
+            decision = {
+                status: 'eligible',
+                icon: '✅',
+                text: 'ELIGIBLE for Akassa',
+                details: `You meet all requirements! You have ${qualifyingMonths} qualifying months and ${metRequirements}/${totalRequirements} requirements met. You can apply for unemployment insurance.`,
+                actions: ['apply']
+            };
+        } else if (metRequirements >= 8 && qualifyingMonths >= 4) {
+            decision = {
+                status: 'partial',
+                icon: '⚠️',
+                text: 'LIKELY ELIGIBLE',
+                details: `You're close to meeting requirements. You have ${qualifyingMonths} qualifying months and ${metRequirements}/${totalRequirements} requirements met. Review missing requirements and consider applying.`,
+                actions: ['prepare']
+            };
+        } else if (metRequirements >= 6) {
+            decision = {
+                status: 'partial',
+                icon: '⚠️',
+                text: 'MAY BE ELIGIBLE',
+                details: `You have ${metRequirements}/${totalRequirements} requirements met and ${qualifyingMonths} qualifying months. Some requirements may need attention before applying.`,
+                actions: ['prepare']
+            };
+        } else if (metRequirements > 0) {
+            decision = {
+                status: 'not-eligible',
+                icon: '❌',
+                text: 'NOT ELIGIBLE',
+                details: `You have ${metRequirements}/${totalRequirements} requirements met and ${qualifyingMonths} qualifying months. You need to meet more requirements before applying.`,
+                actions: []
+            };
+        }
+
+        // Update decision display
+        this.decisionStatus.className = `decision-status ${decision.status}`;
+        this.decisionStatus.innerHTML = `
+            <span class="decision-icon">${decision.icon}</span>
+            <span class="decision-text">${decision.text}</span>
+        `;
+        
+        this.decisionDetails.innerHTML = `<p>${decision.details}</p>`;
+        
+        // Update action buttons
+        this.applyNowBtn.style.display = decision.actions.includes('apply') ? 'block' : 'none';
+        this.prepareBtn.style.display = decision.actions.includes('prepare') ? 'block' : 'none';
+        this.decisionActions.style.display = decision.actions.length > 0 ? 'flex' : 'none';
     }
 
     savePersonalData() {
