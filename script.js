@@ -252,20 +252,47 @@ class AkassaApp {
         document.getElementById(`${year}-average`).textContent = this.formatCurrency(averageIncome);
     }
 
+    calculateConsecutiveQualifyingMonths(incomes) {
+        let maxConsecutive = 0;
+        let currentConsecutive = 0;
+        
+        for (let income of incomes) {
+            if (income >= this.MIN_QUALIFYING_INCOME) {
+                currentConsecutive++;
+                maxConsecutive = Math.max(maxConsecutive, currentConsecutive);
+            } else {
+                currentConsecutive = 0;
+            }
+        }
+        
+        return maxConsecutive;
+    }
+
     updateOverallSummary() {
         const allIncomes = Array.from(this.incomeInputs).map(input => parseFloat(input.value) || 0);
         const totalQualifying = allIncomes.filter(income => income >= this.MIN_QUALIFYING_INCOME).length;
         const totalIncome = allIncomes.reduce((sum, income) => sum + income, 0);
         const averageMonthly = totalIncome / allIncomes.length;
         
-        // Determine eligibility based on official Unionen Akassa rules
+        // Determine eligibility based on official Unionen Akassa rules (post-Oct 2025)
         let eligibilityStatus = 'Not Eligible';
+        let benefitDays = 0;
+        
+        // Check for consecutive months qualification (66 days)
+        const consecutiveMonths = this.calculateConsecutiveQualifyingMonths(allIncomes);
+        
         if (totalQualifying >= 11) {
             eligibilityStatus = 'Eligible (300 days)';
+            benefitDays = 300;
         } else if (totalQualifying >= 8) {
             eligibilityStatus = 'Eligible (200 days)';
+            benefitDays = 200;
         } else if (totalQualifying >= 4) {
             eligibilityStatus = 'Eligible (100 days)';
+            benefitDays = 100;
+        } else if (consecutiveMonths >= 4) {
+            eligibilityStatus = 'Eligible (66 days)';
+            benefitDays = 66;
         }
         
         document.getElementById('total-qualifying').textContent = `${totalQualifying}/24`;
@@ -323,10 +350,12 @@ class AkassaApp {
         // Check if user has qualifying income months
         const allIncomes = Array.from(this.incomeInputs).map(input => parseFloat(input.value) || 0);
         const qualifyingMonths = allIncomes.filter(income => income >= this.MIN_QUALIFYING_INCOME).length;
+        const totalIncome = allIncomes.reduce((sum, income) => sum + income, 0);
         
         // Auto-check income-related requirements
         const incomeMonthsCheckbox = document.getElementById('assess-income-months');
         const workHistoryCheckbox = document.getElementById('assess-work-history');
+        const totalIncomeCheckbox = document.getElementById('assess-total-income');
         
         if (incomeMonthsCheckbox) {
             incomeMonthsCheckbox.checked = qualifyingMonths >= 4;
@@ -334,6 +363,10 @@ class AkassaApp {
         
         if (workHistoryCheckbox) {
             workHistoryCheckbox.checked = allIncomes.some(income => income > 0);
+        }
+        
+        if (totalIncomeCheckbox) {
+            totalIncomeCheckbox.checked = totalIncome >= 120000; // 120,000 SEK total requirement
         }
     }
 
