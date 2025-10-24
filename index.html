@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unionen Akassa Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Unionen Akassa Calculator</h1>
+            <p class="subtitle">Beräkna din arbetslöshetsersättning efter oktober 2025</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <h2>Grundinställningar</h2>
+                
+                <div class="input-group">
+                    <label for="previousIncome">Tidigare månadslön (SEK):</label>
+                    <input type="number" id="previousIncome" placeholder="35000" min="0" step="1000">
+                    <small>Din genomsnittliga månadslön från föregående period</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="membershipDuration">Medlemskap längd:</label>
+                    <select id="membershipDuration">
+                        <option value="50">Mindre än 6 månader (50%)</option>
+                        <option value="60">6-11 månader (60%)</option>
+                        <option value="80" selected>12+ månader (80%)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="workStatus">Arbetsstatus:</label>
+                    <select id="workStatus">
+                        <option value="unemployed" selected>Arbetslös</option>
+                        <option value="employed">Arbetar deltid</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-section">
+                <h2>Månadsberäkning</h2>
+                
+                <div class="input-group">
+                    <label for="monthlyIncome">Månadsinkomst denna månad (SEK):</label>
+                    <input type="number" id="monthlyIncome" placeholder="0" min="0" step="1000">
+                    <small>Inkludera alla inkomster: lön, fakturor, gigs</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="unavailableDays">Dagar otillgänglig:</label>
+                    <input type="number" id="unavailableDays" placeholder="0" min="0" max="31" step="1">
+                    <small>Sjuk, VAB, resor, studier etc.</small>
+                </div>
+
+                <button id="calculateBtn" class="calculate-btn">Beräkna Akassa</button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>Resultat</h2>
+                <div class="result-card">
+                    <div class="result-item">
+                        <span class="label">Grundbelopp:</span>
+                        <span class="value" id="baseAmount">0 SEK</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Inkomstreduktion:</span>
+                        <span class="value" id="incomeReduction">0 SEK</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Tillgänglighetsreduktion:</span>
+                        <span class="value" id="availabilityReduction">0 SEK</span>
+                    </div>
+                    <div class="result-item total">
+                        <span class="label">Slutlig Akassa:</span>
+                        <span class="value" id="finalAmount">0 SEK</span>
+                    </div>
+                </div>
+
+                <div class="scenario-info">
+                    <h3>Scenario Information</h3>
+                    <div class="info-item">
+                        <span class="label">Maxbelopp:</span>
+                        <span class="value">34,000 SEK/månad</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Ersättningsgrad:</span>
+                        <span class="value" id="replacementRate">80%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Status:</span>
+                        <span class="value" id="statusInfo">Arbetslös</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenarios-section">
+                <h2>Vanliga Scenarier</h2>
+                <div class="scenario-buttons">
+                    <button class="scenario-btn" data-income="0" data-days="0">Helt arbetslös</button>
+                    <button class="scenario-btn" data-income="15000" data-days="0">Deltidsarbete (15k)</button>
+                    <button class="scenario-btn" data-income="25000" data-days="0">Deltidsarbete (25k)</button>
+                    <button class="scenario-btn" data-income="0" data-days="5">Sjuk 5 dagar</button>
+                    <button class="scenario-btn" data-income="0" data-days="10">Resa 10 dagar</button>
+                    <button class="scenario-btn" data-income="35000" data-days="0">Full arbetslön</button>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h2>Viktiga Regler</h2>
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <h3>Maxbelopp</h3>
+                        <p>34,000 SEK per månad (före skatt)</p>
+                    </div>
+                    <div class="rule-card">
+                        <h3>Ersättningsgrad</h3>
+                        <p>12+ månader: 80%<br>
+                        6-11 månader: 60%<br>
+                        &lt;6 månader: 50%</p>
+                    </div>
+                    <div class="rule-card">
+                        <h3>Inkomstreduktion</h3>
+                        <p>Om månadsinkomst ≥ 34,000 SEK blir akassa = 0</p>
+                    </div>
+                    <div class="rule-card">
+                        <h3>Tillgänglighet</h3>
+                        <p>~1/22 per otillgänglig dag</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Baserat på Unionen Akassa regler efter oktober 2025</p>
+            <p><a href="https://www.unionensakassa.se" target="_blank">Unionen Akassa</a> | 
+               <a href="https://arbetsformedlingen.se" target="_blank">Arbetsförmedlingen</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
