@@ -13,7 +13,16 @@
             <p class="subtitle">Calculate your unemployment insurance payment after October 2025</p>
         </header>
 
+        <nav class="main-nav">
+            <button class="nav-btn active" data-page="calculator">Calculator</button>
+            <button class="nav-btn" data-page="eligibility">Eligibility Check</button>
+            <button class="nav-btn" data-page="worksheet">Income Worksheet</button>
+            <button class="nav-btn" data-page="dashboard">My Data</button>
+        </nav>
+
         <main>
+            <!-- Calculator Page -->
+            <div id="calculator-page" class="page active">
             <div class="calculator-section">
                 <h2>Basic Settings</h2>
                 
@@ -129,6 +138,280 @@
                     <div class="rule-card">
                         <h3>Availability</h3>
                         <p>~1/22 per unavailable day</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Eligibility Check Page -->
+            <div id="eligibility-page" class="page">
+                <div class="eligibility-section">
+                    <h2>Unionen Akassa Eligibility Checklist</h2>
+                    <p class="section-description">Check all requirements to ensure you qualify for unemployment insurance</p>
+                    
+                    <div class="checklist-container">
+                        <div class="requirement-group">
+                            <h3>Membership Requirements</h3>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="akassa-member" class="requirement-checkbox">
+                                <label for="akassa-member">I am a Unionen Akassa member</label>
+                                <span class="requirement-status" id="member-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="membership-paid" class="requirement-checkbox">
+                                <label for="membership-paid">My membership fees are paid and current</label>
+                                <span class="requirement-status" id="fees-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="membership-duration" class="requirement-checkbox">
+                                <label for="membership-duration">I have been a member for at least 12 months</label>
+                                <span class="requirement-status" id="duration-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h3>Work History Requirements</h3>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="work-history" class="requirement-checkbox">
+                                <label for="work-history">I have worked and earned income in Sweden</label>
+                                <span class="requirement-status" id="work-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="income-months" class="requirement-checkbox">
+                                <label for="income-months">I have earned at least 11,000 SEK in at least 6 months of the last 12 months</label>
+                                <span class="requirement-status" id="income-months-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="recent-work" class="requirement-checkbox">
+                                <label for="recent-work">I have worked within the last 6 months</label>
+                                <span class="requirement-status" id="recent-work-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h3>Unemployment Status</h3>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="unemployed-status" class="requirement-checkbox">
+                                <label for="unemployed-status">I am currently unemployed or working less than full-time</label>
+                                <span class="requirement-status" id="unemployed-status-check">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="af-registered" class="requirement-checkbox">
+                                <label for="af-registered">I am registered with Arbetsförmedlingen</label>
+                                <span class="requirement-status" id="af-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="available-work" class="requirement-checkbox">
+                                <label for="available-work">I am available for work (not sick, traveling, etc.)</label>
+                                <span class="requirement-status" id="available-status">❌</span>
+                            </div>
+                        </div>
+
+                        <div class="requirement-group">
+                            <h3>Application Requirements</h3>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="application-submitted" class="requirement-checkbox">
+                                <label for="application-submitted">I have submitted my main Akassa application</label>
+                                <span class="requirement-status" id="app-status">❌</span>
+                            </div>
+                            <div class="requirement-item">
+                                <input type="checkbox" id="monthly-reports" class="requirement-checkbox">
+                                <label for="monthly-reports">I will submit monthly applications and AF reports</label>
+                                <span class="requirement-status" id="reports-status">❌</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="eligibility-summary">
+                        <h3>Eligibility Summary</h3>
+                        <div class="summary-card">
+                            <div class="summary-item">
+                                <span class="label">Requirements Met:</span>
+                                <span class="value" id="requirements-met">0/12</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Eligibility Status:</span>
+                                <span class="value" id="eligibility-status">Not Eligible</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Missing Requirements:</span>
+                                <span class="value" id="missing-requirements">12 items</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Income Worksheet Page -->
+            <div id="worksheet-page" class="page">
+                <div class="worksheet-section">
+                    <h2>12-Month Income Worksheet</h2>
+                    <p class="section-description">Track your income for the last 12 months to verify eligibility</p>
+                    
+                    <div class="worksheet-container">
+                        <div class="worksheet-header">
+                            <h3>Monthly Income Tracking</h3>
+                            <button id="save-worksheet" class="save-btn">Save My Data</button>
+                        </div>
+                        
+                        <div class="income-grid">
+                            <div class="month-row header">
+                                <div class="month-name">Month</div>
+                                <div class="income-amount">Income (SEK)</div>
+                                <div class="qualifying">Qualifies?</div>
+                                <div class="notes">Notes</div>
+                            </div>
+                            
+                            <div class="month-row" data-month="0">
+                                <div class="month-name">Current Month</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-1">
+                                <div class="month-name">Last Month</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-2">
+                                <div class="month-name">2 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-3">
+                                <div class="month-name">3 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-4">
+                                <div class="month-name">4 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-5">
+                                <div class="month-name">5 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-6">
+                                <div class="month-name">6 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-7">
+                                <div class="month-name">7 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-8">
+                                <div class="month-name">8 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-9">
+                                <div class="month-name">9 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-10">
+                                <div class="month-name">10 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                            
+                            <div class="month-row" data-month="-11">
+                                <div class="month-name">11 Months Ago</div>
+                                <input type="number" class="income-input" placeholder="0" min="0" step="1000">
+                                <div class="qualifying-indicator">❌</div>
+                                <input type="text" class="notes-input" placeholder="Work details...">
+                            </div>
+                        </div>
+                        
+                        <div class="worksheet-summary">
+                            <h3>Income Summary</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="label">Qualifying Months:</span>
+                                    <span class="value" id="qualifying-months">0/12</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Total Income:</span>
+                                    <span class="value" id="total-income">0 SEK</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Average Monthly:</span>
+                                    <span class="value" id="average-income">0 SEK</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Eligibility:</span>
+                                    <span class="value" id="income-eligibility">Not Eligible</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Dashboard Page -->
+            <div id="dashboard-page" class="page">
+                <div class="dashboard-section">
+                    <h2>My Personal Data</h2>
+                    <p class="section-description">View and manage your saved information</p>
+                    
+                    <div class="dashboard-container">
+                        <div class="data-summary">
+                            <h3>Saved Information</h3>
+                            <div class="data-card">
+                                <div class="data-item">
+                                    <span class="label">Personal ID:</span>
+                                    <span class="value" id="personal-id">Not Set</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="label">Last Updated:</span>
+                                    <span class="value" id="last-updated">Never</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="label">Data Status:</span>
+                                    <span class="value" id="data-status">No Data Saved</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-actions">
+                            <h3>Data Management</h3>
+                            <div class="action-buttons">
+                                <button id="load-data" class="action-btn">Load My Data</button>
+                                <button id="export-data" class="action-btn">Export Data</button>
+                                <button id="clear-data" class="action-btn danger">Clear All Data</button>
+                            </div>
+                        </div>
+                        
+                        <div class="data-preview">
+                            <h3>Data Preview</h3>
+                            <div class="preview-content" id="data-preview">
+                                <p>No data loaded. Use the Income Worksheet to enter your information.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
