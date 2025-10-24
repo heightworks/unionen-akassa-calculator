@@ -1,79 +1,79 @@
 # Unionen Akassa Calculator
 
-En personlig kalkylator för att beräkna arbetslöshetsersättning från Unionen Akassa baserat på de nya reglerna som träder i kraft efter 1 oktober 2025.
+A personal calculator for calculating unemployment insurance payments from Unionen Akassa based on the new rules effective after October 1, 2025.
 
-## Funktioner
+## Features
 
-- **Grundberäkning**: Beräkna din månatliga akassa baserat på tidigare lön och medlemskap
-- **Inkomstreduktion**: Se hur deltidsarbete påverkar din ersättning
-- **Tillgänglighetsreduktion**: Beräkna reduktion för sjukdagar, resor, studier etc.
-- **Scenarioplanering**: Snabbberäkning för vanliga situationer
-- **Responsiv design**: Fungerar på både desktop och mobil
+- **Basic Calculation**: Calculate your monthly akassa based on previous salary and membership
+- **Income Reduction**: See how part-time work affects your payment
+- **Availability Reduction**: Calculate reduction for sick days, travel, studies etc.
+- **Scenario Planning**: Quick calculation for common situations
+- **Responsive Design**: Works on both desktop and mobile
 
-## Viktiga Regler (Efter Okt 2025)
+## Important Rules (After Oct 2025)
 
-### Maxbelopp
-- **34,000 SEK per månad** (före skatt)
+### Maximum Amount
+- **34,000 SEK per month** (before tax)
 
-### Ersättningsgrad
-- **12+ månader medlemskap**: 80% av tidigare lön
-- **6-11 månader medlemskap**: 60% av tidigare lön  
-- **<6 månader medlemskap**: 50% av tidigare lön
+### Replacement Rate
+- **12+ months membership**: 80% of previous salary
+- **6-11 months membership**: 60% of previous salary  
+- **<6 months membership**: 50% of previous salary
 
-### Inkomstreduktion
-- Om månadsinkomst ≥ 34,000 SEK blir akassa = 0 för den månaden
-- Annars reduceras akassa proportionellt med inkomsten
+### Income Reduction
+- If monthly income ≥ 34,000 SEK, akassa = 0 for that month
+- Otherwise akassa is reduced proportionally with income
 
-### Tillgänglighet
-- Varje otillgänglig dag reducerar akassa med ~1/22 av månadsbeloppet
+### Availability
+- Each unavailable day reduces akassa by ~1/22 of the monthly amount
 
-## Användning
+## Usage
 
-1. **Öppna `index.html`** i din webbläsare
-2. **Fyll i grundinställningar**:
-   - Tidigare månadslön
-   - Medlemskap längd
-   - Arbetsstatus
-3. **Ange månadsdata**:
-   - Månadsinkomst (om någon)
-   - Dagar otillgänglig
-4. **Klicka "Beräkna Akassa"** eller använd scenario-knapparna
+1. **Open `index.html`** in your browser
+2. **Fill in basic settings**:
+   - Previous monthly salary
+   - Membership duration
+   - Work status
+3. **Enter monthly data**:
+   - Monthly income (if any)
+   - Days unavailable
+4. **Click "Calculate Akassa"** or use scenario buttons
 
-## Vanliga Scenarier
+## Common Scenarios
 
-- **Helt arbetslös**: 0 SEK inkomst, 0 otillgängliga dagar
-- **Deltidsarbete**: Olika inkomstnivåer (15k, 25k SEK)
-- **Sjukdagar**: 5-10 dagar otillgänglig
-- **Full arbetslön**: 35k+ SEK (akassa = 0)
+- **Fully Unemployed**: 0 SEK income, 0 unavailable days
+- **Part-time Work**: Different income levels (15k, 25k SEK)
+- **Sick Days**: 5-10 days unavailable
+- **Full Salary**: 35k+ SEK (akassa = 0)
 
-## Teknisk Information
+## Technical Information
 
-- **Språk**: HTML5, CSS3, Vanilla JavaScript
-- **Inga externa beroenden**: Fungerar offline
-- **Kompatibilitet**: Alla moderna webbläsare
-- **Responsiv**: Optimerad för mobil och desktop
+- **Language**: HTML5, CSS3, Vanilla JavaScript
+- **No external dependencies**: Works offline
+- **Compatibility**: All modern browsers
+- **Responsive**: Optimized for mobile and desktop
 
-## Viktiga Påminnelser
+## Important Reminders
 
-### Månadsrutiner
-- **AF Aktivitetsrapport**: 1-14 varje månad
-- **Akassa Månadsansökan**: Första veckan av nästa månad (senast 3 månader)
+### Monthly Routines
+- **AF Activity Report**: 1-14 every month
+- **Akassa Monthly Application**: First week of next month (latest 3 months)
 
-### Dokumentation
-- Spara Frilans Finans fakturor per månad
-- Håll Arbetsförmedlingen och Unionen konton uppdaterade
-- Registrera dig på AF samma dag du blir arbetslös
+### Documentation
+- Save Frilans Finans invoices per month
+- Keep Arbetsförmedlingen and Unionen accounts updated
+- Register with AF the same day you become unemployed
 
-## Länkar
+## Links
 
-- [Unionen Akassa - Nya regler](https://www.unionensakassa.se/nyheter/2025/03/nya-regler-for-a-kassa-fran-den-1-oktober/)
-- [Unionen - Månadsansökan](https://www.unionensakassa.se/nar-du-har-ersattning/sa-fyller-du-i-din-manadsansokan-eller-tidrapport/)
-- [Arbetsförmedlingen - Aktivitetsrapport](https://arbetsformedlingen.se/for-arbetssokande/arbetslos---vad-hander-nu/aktivitetsrapportera)
+- [Unionen Akassa - New Rules](https://www.unionensakassa.se/nyheter/2025/03/nya-regler-for-a-kassa-fran-den-1-oktober/)
+- [Unionen - Monthly Application](https://www.unionensakassa.se/nar-du-har-ersattning/sa-fyller-du-i-din-manadsansokan-eller-tidrapport/)
+- [Arbetsförmedlingen - Activity Report](https://arbetsformedlingen.se/for-arbetssokande/arbetslos---vad-hander-nu/aktivitetsrapportera)
 
 ## Disclaimer
 
-Denna kalkylator är för personlig användning och baserad på allmänt tillgänglig information om Unionen Akassa regler. Kontakta alltid Unionen Akassa för officiell rådgivning och bekräftelse av din specifika situation.
+This calculator is for personal use and based on publicly available information about Unionen Akassa rules. Always contact Unionen Akassa for official advice and confirmation of your specific situation.
 
 ---
 
-*Skapad för att hjälpa med beräkningar av arbetslöshetsersättning för säsongsarbetare inom repaccess.*
+*Created to help with unemployment insurance calculations for seasonal rope access workers.*

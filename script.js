@@ -62,7 +62,7 @@ class AkassaCalculator {
             this.displayResults(results, inputs);
         } catch (error) {
             console.error('Calculation error:', error);
-            this.showError('Ett fel uppstod vid beräkningen. Kontrollera dina indata.');
+            this.showError('An error occurred during calculation. Check your inputs.');
         }
     }
 
@@ -126,7 +126,7 @@ class AkassaCalculator {
         
         // Update info
         this.replacementRateSpan.textContent = `${replacementRate}%`;
-        this.statusInfoSpan.textContent = workStatus === 'unemployed' ? 'Arbetslös' : 'Arbetar deltid';
+        this.statusInfoSpan.textContent = workStatus === 'unemployed' ? 'Unemployed' : 'Working part-time';
 
         // Show results section
         this.resultsSection.style.display = 'block';
@@ -134,7 +134,7 @@ class AkassaCalculator {
     }
 
     formatCurrency(amount) {
-        return new Intl.NumberFormat('sv-SE', {
+        return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'SEK',
             minimumFractionDigits: 0,
