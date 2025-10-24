@@ -58,6 +58,13 @@ class AkassaCalculator {
     calculate() {
         try {
             const inputs = this.getInputs();
+            
+            // Validate required inputs
+            if (inputs.previousIncome <= 0) {
+                this.showError('Please enter your previous monthly salary to calculate akassa.');
+                return;
+            }
+            
             const results = this.performCalculation(inputs);
             this.displayResults(results, inputs);
         } catch (error) {

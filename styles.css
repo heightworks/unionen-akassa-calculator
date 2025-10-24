@@ -87,10 +87,14 @@ input, select {
     background: white;
 }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+input:required:invalid {
+    border-color: #e74c3c;
+    background-color: #fdf2f2;
+}
+
+input:required:valid {
+    border-color: #27ae60;
+    background-color: #f2fdf2;
 }
 
 small {
