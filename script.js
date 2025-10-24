@@ -66,10 +66,15 @@ class AkassaApp {
 
         // Calculator events
         this.calculateBtn.addEventListener('click', () => this.calculate());
-        [this.previousIncomeInput, this.membershipDurationSelect, this.workStatusSelect, 
+        
+        // Only auto-calculate for non-text inputs to avoid jumping
+        [this.membershipDurationSelect, this.workStatusSelect, 
          this.monthlyIncomeInput, this.unavailableDaysInput].forEach(element => {
             element.addEventListener('input', () => this.calculate());
         });
+        
+        // For previous income, only calculate on blur (when you finish typing)
+        this.previousIncomeInput.addEventListener('blur', () => this.calculate());
 
         // Scenario buttons
         document.querySelectorAll('.scenario-btn').forEach(btn => {
@@ -191,8 +196,13 @@ class AkassaApp {
         this.statusInfoSpan.textContent = workStatus === 'unemployed' ? 'Unemployed' : 'Working part-time';
 
         // Show results section
+        const wasHidden = this.resultsSection.style.display === 'none';
         this.resultsSection.style.display = 'block';
-        this.resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Only scroll if results were hidden (first calculation)
+        if (wasHidden) {
+            this.resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     updateDataSummaries() {
