@@ -93,7 +93,7 @@ class AkassaApp {
         });
         
         this.saveAllDataBtn.addEventListener('click', () => this.savePersonalData());
-        this.loadDataBtn.addEventListener('click', () => this.loadPersonalData());
+        this.loadDataBtn.addEventListener('click', () => this.loadPersonalData(true));
         this.exportDataBtn.addEventListener('click', () => this.exportPersonalData());
         this.clearDataBtn.addEventListener('click', () => this.clearPersonalData());
     }
@@ -293,10 +293,12 @@ class AkassaApp {
         this.updateDataPage();
     }
 
-    loadPersonalData() {
+    loadPersonalData(showMessage = false) {
         const savedData = localStorage.getItem('akassa_personal_data');
         if (!savedData) {
-            this.showError('No saved data found.');
+            if (showMessage) {
+                this.showError('No saved data found.');
+            }
             return;
         }
         
@@ -323,7 +325,9 @@ class AkassaApp {
                 });
             }
             
-            this.showSuccess('Personal data loaded successfully!');
+            if (showMessage) {
+                this.showSuccess('Personal data loaded successfully!');
+            }
             this.updateDataSummaries();
             this.updateDataPage();
         } catch (error) {
