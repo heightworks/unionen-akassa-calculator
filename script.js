@@ -316,10 +316,14 @@ class AkassaApp {
         
         if (incomeMonthsCheckbox) {
             incomeMonthsCheckbox.checked = qualifyingMonths >= 4;
+            // Trigger change event to update visual state
+            incomeMonthsCheckbox.dispatchEvent(new Event('change'));
         }
         
         if (workHistoryCheckbox) {
             workHistoryCheckbox.checked = allIncomes.some(income => income > 0);
+            // Trigger change event to update visual state
+            workHistoryCheckbox.dispatchEvent(new Event('change'));
         }
     }
 

@@ -385,6 +385,11 @@ small {
     transform: scale(1.2);
     flex-shrink: 0;
     width: 20px;
+    accent-color: #667eea;
+}
+
+.requirement-checkbox:checked {
+    accent-color: #667eea;
 }
 
 .requirement-status {
