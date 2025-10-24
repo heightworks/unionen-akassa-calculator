@@ -257,14 +257,14 @@ class AkassaApp {
         const totalIncome = allIncomes.reduce((sum, income) => sum + income, 0);
         const averageMonthly = totalIncome / allIncomes.length;
         
-        // Determine eligibility
+        // Determine eligibility based on official Unionen Akassa rules
         let eligibilityStatus = 'Not Eligible';
-        if (totalQualifying >= 12) {
-            eligibilityStatus = 'Eligible';
+        if (totalQualifying >= 11) {
+            eligibilityStatus = 'Eligible (300 days)';
         } else if (totalQualifying >= 8) {
-            eligibilityStatus = 'Likely Eligible';
-        } else if (totalQualifying >= 6) {
-            eligibilityStatus = 'Possibly Eligible';
+            eligibilityStatus = 'Eligible (200 days)';
+        } else if (totalQualifying >= 4) {
+            eligibilityStatus = 'Eligible (100 days)';
         }
         
         document.getElementById('total-qualifying').textContent = `${totalQualifying}/24`;
@@ -315,7 +315,7 @@ class AkassaApp {
         const workHistoryCheckbox = document.getElementById('assess-work-history');
         
         if (incomeMonthsCheckbox) {
-            incomeMonthsCheckbox.checked = qualifyingMonths >= 6;
+            incomeMonthsCheckbox.checked = qualifyingMonths >= 4;
         }
         
         if (workHistoryCheckbox) {
@@ -341,7 +341,7 @@ class AkassaApp {
             actions: []
         };
 
-        if (metRequirements >= 10 && qualifyingMonths >= 6) {
+        if (metRequirements >= 10 && qualifyingMonths >= 4) {
             decision = {
                 status: 'eligible',
                 icon: '✅',
